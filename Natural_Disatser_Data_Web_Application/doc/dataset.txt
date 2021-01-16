@@ -1,0 +1,115 @@
+Group members: Katrina Li, Lily Li, Wenlai Han
+
+
+Discussion of our database design:
+User stories and their corresponding implementations:
+
+Description of our dataset selected:
+We mainly integrated this dataset to provide geological information about natural disaster events on a global scale to give further insights for
+scientists from different fields, governments, socially-conscious citizens, etc. Our dataset mainly focuses on three natural disasters that 
+happened around the world: earthquake, volcano eruption, and tsunami. For each event, we are able to provide the following information: 
+(1) Date (detailed to an hour); 
+(2) Country; 
+(3) Longitude and Latitude; 
+(4) Number of people affected
+(5) Different measurements of intensity for each type of natural disaster.
+Besides that, we also have the dataset that describes people affected or made homeless by all of the natural disasters annually in every country 
+for reference. We also keep the dataset that recorded the annual PM2.5 index for each country.
+
+Table Design in our Database:
+
+Table to store our disaster types
+CREATE TABLE disaster_type(
+id integer,
+disaster_type text
+);
+
+Table to store country info
+CREATE TABLE country(
+id integer,
+name text,
+abbreviation text,
+longitude float,
+latitude float,
+)
+
+Table to store Natural Disaster Events
+CREATE TABLE disasters (
+id integer,
+disaster_type_id integer,
+country_id integer,
+date DATE,
+hour integer,
+deaths integer,
+longitude FLOAT,
+latitude FLOAT
+);
+
+Tsunami
+https://www.ngdc.noaa.gov/hazel/view/hazards/tsunami/event-data?maxYear=2020&minYear=1950
+CREATE TABLE tsunami_data(
+disaster_id integer,
+max_water_height_meter FLOAT,
+associated_earthquake_magnitude FLOAT,
+number_of_runups integer
+);
+
+Volcano eruption
+https://www.ngdc.noaa.gov/hazel/view/hazards/volcano/event-data?maxYear=2020&minYear=1950
+CREATE TABLE volcano_eruption_data(
+disaster_id integer,
+volcanic_explosivity_index FLOAT,
+);
+
+Earthquake Data
+https://www.ngdc.noaa.gov/hazel/view/hazards/earthquake/event-data?maxYear=2020&minYear=1950
+CREATE TABLE earthquake_data (
+disaster_id integer,
+magnitude FLOAT,
+focal_depth FLOAT
+);
+
+People Effected by Natural Disasters Annually: 1967--2014
+https://data.world/hdx/97e007af-4733-4b60-a472-a733f10dedd5/workspace/file?filename=total-affected-natural-disasters-csv-1.csv
+CREATE TABLE people_affected(
+year integer,
+country_id id,
+num_people_affected integer
+);
+
+User stories
+STORY: As an environmental scientist, I can retrieve the natural disaster events within a specific geographical region, so that I can analyze 
+the pattern of natural disasters throughout a specific year range.
+IMPLEMENTATION: We can have input boxes for the users to set a specific year range and output all the relevant disasters sorted by magnitude 
+index and year to see if there is a correlation between time and the intensity of disasters. 
+
+STORY: In order to study the correlation between natural disasters and air pollution as an atmospheric chemist, I can output the relevant air 
+quality data around a specific disaster and conduct statistical analysis.
+IMPLEMENTATION: We can use input boxes to locate one specific disaster event in this case and output the air quality data around that period 
+in a graph representing the trend of PM2.5 concentration.
+
+STORY: As a citizen of a country that tsunamis usually occur, I wonder the number of times such natural disasters happen in history and whether
+the number of cases increases or decreases for the past 50 years.
+IMPLEMENTATION: We could add up all the tsunami cases that happen each year in each country and make a line chart for this country with the year
+in the x-axis. We can also inform the user about the countries with most frequently happening tsunamis, and maybe enable comparison of maximum 
+water height (meter) or frequency between two or more countries.
+
+STORY: As a citizen of a country where tsunamis usually occur, I wonder how tsunamis affects my country in comparison to all other natural disasters.
+IMPLEMENTATION: We could calculate the ratio of people affected by tsunami, volcano eruption and earthquake against the total number of people 
+affected by natural disasters and then make a pie chart.
+
+STORY: As an environmental protection skeptic, I can compare air quality data with volcanic activities in different regions, so that I can figure
+out whether air quality is related to volcanic eruptions.
+IMPLEMENTATION: We could create a line chart with two distinct colors, each indicating volcanic eruption numbers and air quality trends in the 
+region of the users’ choice (aggregate data will also be available).
+
+STORY: As a geologist, I can find the disaster occurrence correlation between earthquake events and volcanic eruption in a specific date and region
+to investigate the activity earth crust.
+IMPLEMENTATION: When outputting data related to volcanic eruption in a specific region, also output corresponding earthquakes events information
+in adjacent areas using either country location or longitude and latitude to locate.
+
+Implementation/Web-Development discussion:
+Outputting the raw data seems boring, but associating a map to our natural events seems to be to challenging to accomplish with the time frame we
+are in. However, we do have longitude and latitude information that we need for implementing an interactive map, which might be the core design 
+of our website and help us align other relevant information together smoothly. There has to be some interesting development ideas that lead the
+users to investigate the data more and involve them visually.

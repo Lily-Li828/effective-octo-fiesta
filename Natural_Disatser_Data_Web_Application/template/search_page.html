@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+    <title>Main Page</title>
+
+</head>
+
+<body style="background-color: #ffffff">
+    <div class="top_bar">
+        <logo class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width:200px">
+        </logo>
+
+        <div class='slogan'>
+            NATURAL DISASTER DATABASE
+        </div>
+
+    </div>
+
+    <div class="sticky_bar">
+
+        <ul class="horizontal-navbar">
+            <li><a href="index.html">&nbspHOME</a></li>
+            <li><a href="linechart.html">COUNTRY DISASTER COMPARISON</a></li>
+            <li><a href="histogram.html">DISASTER INTENSITY</a></li>
+            <li><a href="about_page.html">ABOUT</a></li>
+        </ul>
+
+
+        <form action="" class="search-bar" method="get">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" min="4" autofocus required autocomplete="off">
+            <button class="search-btn" id="search-button">
+            </button>
+        </form>
+    </div>
+    <p>
+    <table id="disaster-table"></table>
+    </p>
+
+    <script type="text/javascript" src="{{ url_for('static', filename='search.js') }}"></script>
+</body>
+
+
+</html>

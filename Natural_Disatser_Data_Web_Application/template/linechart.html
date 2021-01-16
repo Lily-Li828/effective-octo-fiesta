@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='chartist.min.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <title>Cumulative Country Disaster Count Comparison</title>
+</head>
+<style>
+
+</style>
+
+<body style="background-image: linear-gradient(#e9f0fa, rgb(241, 249, 255));">
+    <div class="top_bar">
+        <logo class="logo">
+            <a href="index.html"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                    style="width:200px"></a>
+        </logo>
+
+        <div class='slogan'>
+            NATURAL DISASTER DATABASE
+        </div>
+
+    </div>
+
+    <div class="sticky_bar">
+
+        <ul class="horizontal-navbar">
+            <li><a href="index.html">&nbspHOME</a></li>
+            <li class="current_page"><a href="linechart.html">COUNTRY DISASTER COMPARISON</a></li>
+            <li><a href="histogram.html">DISASTER INTENSITY</a></li>
+            <li><a href="about_page.html">ABOUT</a></li>
+        </ul>
+
+        <form action="search_page.html" class="search-bar" method="get">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" required autocomplete="off">
+            <button class="search-btn" id="search-button">
+            </button>
+        </form>
+        <!-- <form action="" class="search-bar" method="get">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" required autocomplete="off">
+            <button class="search-btn" type="submit" onclick="buildTable()" id="search-button">
+            </button>
+        </form> -->
+    </div>
+    <div class="linechart_intro">
+        <div class="linechart_intro_title">
+            SELECT AND COMPARE
+        </div>
+        <div class="linechart_intro_content">
+            Select 1-3 countries and a disaster type<br>
+            View cumulative data from 1950 to 2019 with a Linechart!
+        </div>
+        <br>
+        <div class="selection_intro_request">
+            Selections with <a style="color:red">*</a> are required 
+        </div>
+
+    </div>
+
+    <div class="button-container"><button onclick="submitClicked()" class="submit" type="button">Submit</button>
+    </div>
+
+    <div class="dropdown_row">
+        <div class="dropdown_linechart" style="top:2em;left:1em;" >
+            <label for="Disaster type">Disaster type</label><span style="color:red">*</span>
+            <br>
+
+            <select name="Disaster type" class="form-control"  id="disaster-type">
+                <option> ----Click to Choose----</option>
+                <option value="0">Earthquake</option>
+                <option value="1">Tsunami</option>
+                <option value="2">Volcano Eruption</option>
+            </select>
+        </div>
+
+        <div class="dropdown_linechart country1" style="top:2em;left:8em;">
+            <label for="country1">Country One</label><span style="color:red">*</span>
+            <br>
+            <select id="country1" name="country1" class="form-control" style ="border-color: transparent transparent rgb(229, 47, 11) transparent;">
+            </select>
+        </div>
+
+        <!-- <span style="color:rgb(229, 47, 11);">Represented by this color</span> -->
+
+        <div class="dropdown_linechart country2" style="top:7em;right:18.6em;">
+            <label for="country2">Country Two</label>
+            <br>
+            <select id="country2" name="country2" class="form-control" style ="border-color: transparent transparent rgb(252, 126, 0) transparent;">
+            </select>
+        </div>
+
+        <!-- <span style="color:rgb(252, 126, 0);">Represented by this color</span> -->
+
+        <div class="dropdown_linechart country3" style="top:7em;right:11em;">
+            <label for="country3">Country Three</label>
+            <br>
+            <select id="country3" name="country3" class="form-control" style ="border-color: transparent transparent rgb(255, 242, 0) transparent;">
+                <option value="empty"></option>
+            </select>
+        </div>
+
+        <!-- <span style="color:rgb(255, 242, 0);">Represented by this color</span> -->
+
+    </div>
+    <div class="rectangular_bg">
+
+    </div>
+
+    
+    <div class="linechart-container" style="bottom:-100px;left:40.5em">
+        <p class="chart-title" id="disaster-comparsion-title"></p>
+        <div class="ct-chart ct-perfect-fourth" id="disaster-comparsion-chart"></div>
+        <div id="state-new-cases-tooltip" class="tooltip"> </div>
+    </div>
+    <p class="read_more_linechart">To know more about the intensity of disasters in this country, please visit our <a
+        href="histogram.html"
+        class="hyperlink_readmore" style="color: rgb(0, 68, 255);">intensity histograms</a></p>
+
+    <!-- <div><img class="profile-image" src="{{ url_for('static', filename='line_chart.png') }}" alt='Logo'></div> -->
+</body>
+
+<!-- <script type="text/javascript" src="{{ url_for('static', filename='Natural_disaster.js') }}"></script> -->
+<script src=" https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="{{ url_for('static', filename='chartist.min.js') }}"></script>
+<script src="{{ url_for('static', filename='linechart.js') }}"></script>
+
+</html>

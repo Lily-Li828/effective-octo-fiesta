@@ -1,0 +1,100 @@
+API Design
+Wenlai Han, Lily Li, Katrina Li
+
+REQUEST:/people_affected_all_countries/{YEAR}
+
+RESPONSE: a JSON list of dictionaries, each being a country with years and corresponding people affected by natural disasters as key-value pairs.
+
+country_id -- (integer) country id that corresponds to the specific country 
+people_affected -- (integer) the population impacted by natural disasters in a given year within a specific country 
+people_homeless -- (integer) the population made homeless by natural disasters in a given year within a specific country 
+
+Example output of one of the countries: {China:{people_affected:100,people_homeless:1000}}
+
+================================================
+REQUEST:/natural_disaster[?year={YEAR}&disaster_type={DISASTER_TYPE_ID}&country={COUNTRY_ID}]
+
+	REPONSE: a JSON list of dictionaries, each representing a natural disaster event, give out all the year/disaster_types/country if not specified in the request (so the default is to output all the disaster events for every year, disaster type and country).  
+
+
+with the following attributes:
+country_id -- (integer) country id that corresponds to the specific country 
+disaster_type_id -- (integer) disaster id that represents a disaster type
+longitude -- (float) the longitude of the event 
+latitude -- (float) the latitude of the event
+death -- (integer) the deaths caused by the exact disaster event
+date -- (date) a date object corresponding to the event
+hour -- (integer) the hour that the event occurred (used for tie breaking)
+
+Example response: [{country_id: 1, disaster_type_id: 1, longitude: 10,...}, {...},...]
+================================================
+REQUEST:/natural_disaster_full_info/{YEAR}
+
+Example Response:
+{earthquake: {{country_id: 1, disaster_type_id: 1, longitude: 10, magnitude:6...}, {country_id...}, {country_id...}},
+ tsunami: {{country_id: 1, disaster_type_id: 1, longitude: 10,...}, {country_id...}, {country_id...}}, 
+volcano_eruption: {{country_id: 1, disaster_type_id: 1, longitude: 10,...}, {country_id...}, {country_id...}}}
+
+RESPONSE: a JSON dictionary of three keys which values are dictionaries, each being a disaster event set for earthquake, tsunami, and volcano eruption, with all the corresponding disaster events in them. We set the default year to 2015 if the year is not specified (caused by the user). The individual disaster events are also represented using a dictionary with following shared attributes:
+disaster_id -- (integer) disaster id that correspond to individual disaster event
+country_id -- (integer) country id that corresponds to the specific country 
+disaster_type_id -- (integer) disaster id that represents a disaster type
+longitude -- (float) the longitude of the event 
+latitude -- (float) the latitude of the event
+death -- (integer) the deaths caused by the exact disaster event
+date -- (date) a date object corresponding to the event
+hour -- (integer) the hour that the event occurred (used for tie breaking)
+
+But also 
+(for earthquakes only)
+magnitude FLOAT,
+focal_depth FLOAT;
+
+(for volcano eruptions only)
+volcanic_explosivity_index FLOAT,
+
+(for tsunamis only)
+max_water_height_meter FLOAT,
+associated_earthquake_magnitude FLOAT,
+number_of_runups INT
+
+
+================================================
+REQUEST:/cumulative_country_cases/{STARTYEAR}/{ENDYEAR}/{DISASTER_TYPE_ID}/{COUNTRY_ID}
+
+RESPONSES: a JSON list of dictionaries, each containing the year and the sum of cases before that year:
+
+year -- (integer) a year that corresponds to x-axis value in the line 
+cumulative_cases --(integer) that represents the sum of all cases before and during the year
+
+Example: 
+REQUEST: cumulative_country_cases/1970/1972/1(that indicates tsunami)/1(whatever country it is)
+[{1970: 10},{1971:25},{1972:45}]
+================================================
+REQUEST:/country_disaster_intensity[?country={string}]
+
+RESPONSES: a JSON dictionary of three keys which values are dictionaries, each being a disaster event set for earthquake, tsunami, and volcano eruption, with all the corresponding disaster magnitude/intensity in them.
+
+Attributes:
+disaster_type_id -- (integer) disaster id that represents a disaster type
+case_frequency --(integer) that represents the sum of all cases before and during the year
+
+Example:
+{earthquake: {4.0: 0 (here, 4.0 means the range 4.0-4.5), 4.5: 1, 5.0: 3, 5.5: 0, 6.0: 4, 6.5: 2, 7.0: 0, 7.5: 0}, tsunami: {3.0: 0, 3.2: 1, 3.4: 3, 3.6: 0}, volcano_eruption: {1.0: 0, 2.0:1, 3.0: 4, 4.0: 2}}
+
+================================================
+REQUEST:/countryID/{COUNTRY_NAME}
+RESPONSE: a JSON dictionary that contains the input country name and its corresponding country ID as key-value pairs.
+Example: {China: 10}
+================================================
+REQUEST:/countryName/{COUNTRY_ID}
+RESPONSE: a JSON dictionary that contains the input country id and its corresponding country name as key-value pairs.
+Example: {10: China}
+================================================
+REQUEST:/disasterID/{DISASTER_TYPE}
+RESPONSE: a JSON dictionary that contains the input type of disaster and its corresponding disasterID as key-value pairs.
+Example: {tsunami: 1}
+================================================
+REQUEST:/disasterType/{DISASTER_ID}
+RESPONSE: a JSON dictionary that contains the input disaster id and its corresponding disaster type as key-value pairs.
+Example: {1: tsunami}

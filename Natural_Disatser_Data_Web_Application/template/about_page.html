@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='about_page.js') }}"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='search.js') }}"></script> -->
+    <title>About Natural Disasters</title>
+</head>
+<style>
+
+</style>
+
+<body>
+    <div class="top_bar">
+        <logo class="logo">
+            <a href="homepage.html"><img src="{{ url_for('static', filename='logo.png') }}" alt="Logo"
+                    style="width:200px"></a>
+        </logo>
+        <div class='slogan'>
+            NATURAL DISASTER DATABASE
+        </div>
+    </div>
+
+    <div class="sticky_bar">
+        <ul class="horizontal-navbar">
+            <li><a href="index.html">&nbspHOME</a></li>
+            <li><a href="linechart.html">COUNTRY DISASTER COMPARISON</a></li>
+            <li><a href="histogram.html">DISASTER INTENSITY</a></li>
+            <li class="current_page"><a href="about_page.html">ABOUT</a></li>
+        </ul>
+
+
+        <form action="search_page.html" class="search-bar" method="get">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" required autocomplete="off">
+            <button class="search-btn" id="search-button">
+            </button>
+        </form>
+        <!-- <form action="" class="search-bar">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" required autocomplete="off">
+            <button class="search-btn" type="submit" onclick="buildTable()" id="search-button">
+            </button>
+        </form> -->
+
+    </div>
+
+    <!-- picture slide show -->
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="{{ url_for('static', filename='volcano_chile.jpg') }}" style="width:100%">
+            <div class="caption_text">Volcàn Villaricca seen at night from Pucón, Chile on July 12, 2015.
+                Villarrica is among the most active volcanoes in South America</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="{{ url_for('static', filename='earthquake_road.jpg') }}" style="width:100%">
+            <div class="caption_text">Alaska heavily damaged by an 7.1 earthquake on November 30, 2018</div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="{{ url_for('static', filename='tsunami_2011.jpg') }}" style="width:100%">
+            <div class="caption_text">On Friday 11 March 2011
+                , an 8.9 magnitude earthquake struck close to the north east coast of Japan</div>
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    </div>
+
+    <div class="alldots" style="text-align:center">
+        <span class="dot" onclick="currentSlide(1)"></span>
+        <span class="dot" onclick="currentSlide(2)"></span>
+        <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+    <div class="introduction" style="position:relative;">
+
+        <div class="intro_second">
+
+            <p class="introduction_title">
+                About our Website
+            </p>
+
+            <p class="introduction_text">
+
+                Our website provides data visualization for three genres of natural
+                disasters:<br><br> earthquake, tsunami, and volcano eruptions.<br><br>
+
+                Click on the cards below to learn more about each of the natural disasters.
+
+
+            </p>
+
+        </div>
+
+        <div class="intro_third">
+
+            <a
+                href="https://www.usgs.gov/natural-hazards/earthquake-hazards/science/science-earthquakes?qt-science_center_objects=0#qt-science_center_objects">
+                <div class="card">
+                    <span class="tiptext">Click for more</span>
+                    <img src="{{ url_for('static', filename='earthquake_intro.jpg') }}" alt="Avatar" style="width:100%">
+                    <div class="text_on_card">
+                        <p class="card_title">EARTHQUAKE</p>
+                        <br>
+                        <p class="card_content">An earthquake is the result of a
+                            sudden release of stored energy in
+                            the Earth's crust that creates seismic waves.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a
+                href="https://www.usgs.gov/natural-hazards/earthquake-hazards/science/science-earthquakes?qt-science_center_objects=0#qt-science_center_objects">
+                <div class="card">
+                    <span class="tiptext">Click for more</span>
+                    <img src="{{ url_for('static', filename='volcano3.jpeg') }}" alt="Avatar" style="width:100%">
+                    <div class="text_on_card">
+                        <p class="card_title">VOLCANIC ERUPTION</p>
+                        <br>
+                        <p class="card_content">Volcanic eruptions happen when lava and gas are discharged from a
+                            volcanic vent.
+                            They often cause volcanic ash landslides called Lahar.</p>
+                    </div>
+                </div>
+            </a>
+
+            <a href="https://spaceplace.nasa.gov/tsunami/en/">
+                <div class="card">
+                    <span class="tiptext">Click for more</span>
+                    <img src="{{ url_for('static', filename='tsunami2.jpg') }}" alt="Avatar" style="width:100%">
+                    <div class="text_on_card">
+                        <p class="card_title">TSUNAMI</p>
+                        <br>
+                        <p class="card_content">Tsunami is a Japanese word that means "harbor wave."
+                            It is a large wave caused by movements in Earth's outer layer, or crust.</p>
+                    </div>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="white_background">
+    </div>
+
+    <div class="about_visualization">
+        About Our Data Visualizations
+    </div>
+
+    <div class="about_histogram">
+        <div class="about_histogram_title">
+            Histogram
+        </div>
+        <div class="about_histogram_text">
+            Histogram is a graphical display of data using bars of different heights.
+            It is similar to a Bar Chart, but a histogram groups numbers into ranges .
+            The height of each bar shows how many fall into each range.
+            <br><br>
+            On this website, we use histogram to compare in between three disaster datas
+            of a chosen country.
+        </div>
+
+    </div>
+    <div class="greystripe"><img src="{{ url_for('static', filename='grey_stripe.jpg') }}" alt="Avatar"
+            style="width:100%;display:block;"></div>
+    <div class="about_linechart">
+        <div class="about_linechart_title">
+            Line-chart
+        </div>
+        <div class="about_linechart_text">
+            A line chart or line plot or line graph or
+            curve chart is a type of chart which displays information
+            as a series of data points called 'markers' connected by straight line segments.
+            <br><br>
+            On this website, we use a linechart to compare data of one disaster between one to three
+            chosen countries.
+        </div>
+
+    </div>
+    <!-- <script type="text/javascript" src="{{ url_for('static', filename='search.js') }}"></script> -->
+</body>
+
+
+
+</html>

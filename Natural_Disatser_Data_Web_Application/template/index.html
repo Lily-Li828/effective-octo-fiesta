@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <script type="text/javascript" src="{{ url_for('static', filename='Natural_disaster.js') }}"></script>
+
+    <title>Main Page</title>
+
+</head>
+
+
+
+
+
+<body style="background-color: #587d9f">
+    <div class="top_bar">
+        <logo class="logo">
+            <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo" style="width:200px">
+        </logo>
+
+        <div class='slogan'>
+            NATURAL DISASTER DATABASE
+        </div>
+
+    </div>
+
+    <div class="sticky_bar">
+
+        <ul class="horizontal-navbar">
+            <li class="current_page"><a href="index.html">&nbspHOME</a></li>
+            <li><a href="linechart.html">COUNTRY DISASTER COMPARISON</a></li>
+            <li><a href="histogram.html">DISASTER INTENSITY</a></li>
+            <li><a href="about_page.html">ABOUT</a></li>
+        </ul>
+
+        <form action="search_page.html" class="search-bar" method="get">
+            <input type="number" id="search-box" placeholder="Input a Year within 1950-2020 with YYYY format"
+                name="search" pattern=".*\S.*" required autocomplete="off">
+            <button class="search-btn" id="search-button">
+            </button>
+        </form>
+
+    </div>
+
+
+    <div class="video">
+        <p>
+            <video autoplay="autoplay" ; loop="loop" ; muted="muted" ;
+                src="{{ url_for('static', filename='homepage_video.mp4') }}"></video>
+        </p>
+
+        <div class="rectangular"></div>
+        <div class="slide_container">
+
+            <div class="banner"></div>
+            <div class="banner_word">
+                <p class="banner_word_title">
+                    Do You Know...
+                </p>
+                <br>
+                <div class="banner_word_content">
+                    There are about 1,500 potentially active volcanoes worldwide<br>
+                    on January 21st, 2000, half a million people were made homelss<br>
+                    by the Taal volcano eruption in the Philippines...<a
+                        href="https://www.savethechildren.org/us/about-us/media-and-news/2020-press-releases/children-homeless-after-philippines-volcano"
+                        class="hyperlink_readmore">MoreInfo</a>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="scroll">
+
+            <p>
+                Scroll down for more
+            </p>
+            <br>
+            <p><i class="arrow down"></i></p>
+            <p><i class="arrow down"></i></p>
+            <p><i class="arrow down"></i></p>
+
+        </div>
+
+        <!-- <button class="slide_button"></button> -->
+
+
+
+    </div>
+
+
+    <div class="profile-image">
+
+        <p class="fourpics_title">Disaster Data Around the World</p>
+        <p class="fourpics_title_sub">Click on pictures to see disaster data in specific countries</p>
+
+        <div class="fourpics" onClick="toLinechart(0)" style="left:11.5em">
+
+
+            <p class="words_for_pics">Tsunami<br>in Japan
+            </p>
+
+            <a
+                ><img
+                    src="{{ url_for('static', filename='homepage_tsunami.jpg') }}" alt=""></a>
+
+
+        </div>
+
+        <dive class="fourpics" onClick="toLinechart(1)" style="left:31.5em">
+
+            <p class="words_for_pics">Earthquakes<br>in the United States</p>
+
+            <a><img
+                    src="{{ url_for('static', filename='homepage_earthquake.png') }}" alt=""></a>
+
+        </dive>
+
+
+        <div class="fourpics" onClick="toLinechart(2)" style="left:51.5em">
+
+            <p class="words_for_pics">Volcanic Eruptions<br>in Chile</p>
+
+            <a><img
+                    src="{{ url_for('static', filename='homepage_volcano.jpg') }}" alt=""></a>
+
+
+        </div>
+
+
+    </div>
+
+    <div class=" background_under_fourpics">
+        Cumulative Natural Disaster Data
+
+    </div>
+    <div class="background_under_fourpics2">
+
+    </div>
+    <div class="data_part">
+        <div class="col_half" style="left:9em">
+            <div class="number">60,000</div>
+            <div class="number_info">people killed by natural disasters yearly</div>
+            <div class="number">200,000</div>
+            <div class="number_info">people killed in 2010 earthquake</div>
+            <div class="number">1,500</div>
+            <div class="number_info">potentially active volcanoes</div>
+            <div class="number">$11.5 B.</div>
+            <div class="number_info">economic loss to natural disasters,2020</div>
+
+        </div>
+        <div class="col_half" style="left:13em">
+            <div class="number">14 Million</div>
+            <div class="number_info">people homeless due to natural disasters</div>
+            <div class="number">230,000</div>
+            <div class="number_info">people killed by 2004 tsunami</div>
+            <div class="number">20,000</div>
+            <div class="number_info">earthquakes each year</div>
+            <div class="number">$91 B.</div>
+            <div class="number_info">spent on natural disasters in US in 2018 </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="Copyright">
+
+        <p>
+            Copyright: Lilian Disaster Group
+        </p>
+
+        <p>
+            Carleton College CS257 2020 Fall
+        </p>
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+
+</html>
